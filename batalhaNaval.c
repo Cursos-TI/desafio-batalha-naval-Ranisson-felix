@@ -26,16 +26,49 @@ int main() {
     int coordenadas[12][2] = {
         {1, 2}, {1, 3}, {1, 4}, // Navio Horizontal
         {6, 9}, {7, 9}, {8, 9}, // Navio Vertical
-        {3, 3}, {4, 4}, {5, 5}, // Navio Diagonal
+        {0, 0}, {1, 1}, {2, 2}, // Navio Diagonal
         {0, 9}, {1, 8}, {2, 7}  // Navio na Diagonal Oposta
         };
 
-    printf("BATALHA NAVAL\n\n");
+        
+    //matrizes para habilidades especiais
+
+    int cone[5][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1}   
+    };
+    
+    int cruz[5][5] = {
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 1, 0, 0}
+    };
+    int octaedro[5][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    printf("     JOGO BATALHA NAVAL\n");
+    printf("\n");
 
     // Este loop "prepara" o tabuleiro antes de mostrar ao usuário
 
     for (int i = 0; i < 12; i++) {
         tabuleiro[coordenadas[i][0]][coordenadas[i][1]] = 3;
+    }
+
+    // Preenchendo o tabuleiro com as habilidades especiais
+
+    for(int i = 0; i < 5; i++){
+        if(i < 3){
+            for(int j = 0; j < 5; j++){
+                tabuleiro[i+7][j] = cone[i][j];
+                tabuleiro[i+6][j + 4] = cruz[i][j];
+                tabuleiro[i+3][j+2] = octaedro[i][j];
+            }
+        }
     }
 
     //Loops de impressão do tabuleiro
